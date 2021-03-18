@@ -1,0 +1,17 @@
+@ARTICLE{2011MNRAS.414.1679E,
+       author = {{Espinoza}, C.~M. and {Lyne}, A.~G. and {Stappers}, B.~W. and {Kramer}, M.},
+        title = "{A study of 315 glitches in the rotation of 102 pulsars}",
+      journal = {\mnras},
+     keywords = {stars: neutron, pulsars: general, Astrophysics - High Energy Astrophysical Phenomena},
+         year = 2011,
+        month = jun,
+       volume = {414},
+       number = {2},
+        pages = {1679-1704},
+          doi = {10.1111/j.1365-2966.2011.18503.x},
+archivePrefix = {arXiv},
+       eprint = {1102.1743},
+ primaryClass = {astro-ph.HE},
+       adsurl = {https://ui.adsabs.harvard.edu/abs/2011MNRAS.414.1679E},
+      adsnote = {Provided by the SAO/NASA Astrophysics Data System}
+}
