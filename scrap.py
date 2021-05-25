@@ -2,8 +2,8 @@ if __name__ == "__main__":
 
     from json import dump
     from requests import get
-    from bs4 import BeautifulSoup
-    from typing import Dict, Union, Optional
+    from bs4 import BeautifulSoup  # type: ignore
+    from typing import Dict, List, Union, Optional
 
     data: Dict[
         str,
@@ -14,11 +14,14 @@ if __name__ == "__main__":
                     str,
                     int,
                     Dict,
+                    List,
                     float,
                 ]
             ],
         ],
     ] = {}
+
+    refs: Dict[str, List[str]] = {}
 
     rows = BeautifulSoup(
         markup=get("http://www.jb.man.ac.uk/pulsar/glitches/gTable.html").content,
@@ -27,7 +30,7 @@ if __name__ == "__main__":
 
     for i, row in enumerate(rows):
         cells = [_.text.strip() for _ in row("td")[1:-1]]
-        glitch = {
+        data[str(i + 1)] = {
             key: (None if cell == "X" else factor * conv(cell))
             for (key, conv, factor), cell in zip(
                 [
@@ -44,10 +47,8 @@ if __name__ == "__main__":
                 cells,
             )
         }
-        glitch["References"] = {
-            str(k + 1): _["href"] for k, _ in enumerate(row("td")[-1]("a"))
-        }
-        data[str(i + 1)] = glitch
+
+        data[str(i + 1)]["References"] = [_["href"] for _ in row("td")[-1]("a")]
 
     with open("glitches.json", "w+") as fobj:
         dump(
