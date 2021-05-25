@@ -21,7 +21,7 @@ if __name__ == "__main__":
         ],
     ] = {}
 
-    refs: Dict[str, List[str]] = {}
+    refs: Dict[str, Dict[str, str]] = {}
 
     rows = BeautifulSoup(
         markup=get("http://www.jb.man.ac.uk/pulsar/glitches/gTable.html").content,
@@ -48,7 +48,7 @@ if __name__ == "__main__":
             )
         }
 
-        data[str(i + 1)]["References"] = {
+        refs[str(i + 1)] = {
             str(iref + 1): _["href"]
             for (
                 iref,
@@ -58,7 +58,7 @@ if __name__ == "__main__":
 
     with open("glitches.json", "w+") as fobj:
         dump(
-            obj=dict(data=data),
+            obj=dict(data=data, refs=refs),
             fp=fobj,
             indent=4,
         )
