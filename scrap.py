@@ -48,7 +48,13 @@ if __name__ == "__main__":
             )
         }
 
-        data[str(i + 1)]["References"] = [_["href"] for _ in row("td")[-1]("a")]
+        data[str(i + 1)]["References"] = {
+            str(iref + 1): _["href"]
+            for (
+                iref,
+                _,
+            ) in enumerate(row("td")[-1]("a"))
+        }
 
     with open("glitches.json", "w+") as fobj:
         dump(
